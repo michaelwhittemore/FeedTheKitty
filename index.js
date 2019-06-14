@@ -11,6 +11,7 @@ $(document).ready(
         $("#confused").hide();
         let score = 0;
         let bestScore = 0;
+        let gameInterval;
         //functions to modify variable and the appriopraite text
         const colorCorrector= (name,value) =>{
             if (value<30){
@@ -49,6 +50,7 @@ $(document).ready(
             bestScore= score > bestScore ? score : bestScore;
             $("#bestScore").text(bestScore)
             score = 0;
+            $('#start').prop('disabled', false);
         }
         //buttons
         $("#feed").click(() => {
@@ -69,7 +71,11 @@ $(document).ready(
         })
         $("#reset").click(() => {
             gameOver()
+            
+        })
+        $("#start").click(()=>{
             gameInterval = setInterval(gameloop, 200)
+            $('#start').prop('disabled', true);
         })
         //gameloop
         const gameloop = () => {
@@ -98,5 +104,5 @@ $(document).ready(
             score++;
             $("#score").text(score)
         }
-        let gameInterval = setInterval(gameloop, 200)
+        
     })
