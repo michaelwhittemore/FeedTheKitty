@@ -12,21 +12,32 @@ $(document).ready(
         let score = 0;
         let bestScore = 0;
         //functions to modify variable and the appriopraite text
+        const colorCorrector= (name,value) =>{
+            if (value<30){
+                $('#'+name).css("color",safe)
+            } else if (value<70){
+                $('#'+name).css("color",mid)
+            } else if (value>=70){
+                $('#'+name).css("color",danger)
+            }
+        }
         const adjustAngery = (amount) => {
             angery += amount;
             angery = angery < 0 ? 0 : angery
             $('#angery').text(angery)
-            
+            colorCorrector('angery',angery)
         }
         const adjustChonky = (amount) => {
             chonky += amount;
             chonky = chonky < 0 ? 0 : chonky
             $('#chonky').text(Math.round(chonky))
+            colorCorrector('chonky',chonky)
         }
         const adjustAnnoyance = (amount) => {
             annoyance += amount;
             annoyance = annoyance < 0 ? 0 : annoyance
             $('#annoyance').text(annoyance)
+            colorCorrector('annoyance',annoyance)
         }
         const gameOver = () => {
             angery = 0;
