@@ -1,9 +1,22 @@
 body {
-    background-color: aqua
+    background-color: #272727;
+    color: #747474
 }
 
 h1 {
     text-align: center
+}
+#angery{
+    color:#14A76C
+}
+#chonky{
+    color:#14A76C
+}
+#annoyance{
+    color:#14A76C
+}
+#beserk {
+    color: red
 }
 
 /* TODO 

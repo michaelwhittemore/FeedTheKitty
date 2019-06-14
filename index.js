@@ -1,31 +1,39 @@
 $(document).ready(
     () => {
+        //intialize variables
+        const safe='#14A76C';
+        const mid='#FFE400';
+        const danger='#FF652F';
         let angery = 0;
         let chonky = 0;
-        let botherly = 0;
+        let annoyance = 0;
         let berserk = false
+        $("#confused").hide();
         let score = 0;
         let bestScore = 0;
+        //functions to modify variable and the appriopraite text
         const adjustAngery = (amount) => {
             angery += amount;
             angery = angery < 0 ? 0 : angery
             $('#angery').text(angery)
+            
         }
         const adjustChonky = (amount) => {
             chonky += amount;
             chonky = chonky < 0 ? 0 : chonky
-            $('#chonky').text(chonky)
+            $('#chonky').text(Math.round(chonky))
         }
-        const adjustBotherly = (amount) => {
-            botherly += amount;
-            botherly = botherly < 0 ? 0 : botherly
-            $('#botherly').text(botherly)
+        const adjustAnnoyance = (amount) => {
+            annoyance += amount;
+            annoyance = annoyance < 0 ? 0 : annoyance
+            $('#annoyance').text(annoyance)
         }
         const gameOver = () => {
             angery = 0;
             chonky = 0;
-            botherly = 0;
+            annoyance = 0;
             berserk = false;
+            $("#confused").hide()
             clearInterval(gameInterval)
             bestScore= score > bestScore ? score : bestScore;
             $("#bestScore").text(bestScore)
@@ -35,30 +43,37 @@ $(document).ready(
         $("#feed").click(() => {
             adjustChonky(5);
             adjustAngery(-10);
-            adjustBotherly(-5);
+            adjustAnnoyance(-5);
         })
         $("#pet").click(() => {
-            adjustBotherly(-5);
-            adjustAngery(Math.round(Math.random() * 20 - 10))
+            adjustAnnoyance(-5);
+            adjustAngery(Math.round(Math.random() * 20 - 13))
+        })
+        $("#pickUp").click(() => {
+            adjustAnnoyance(-10);
+            adjustAngery(20);
+        })
+        $('#sing').click(()=>{
+            $("#confused").show()
         })
         $("#reset").click(() => {
             gameOver()
-            gameInterval = setInterval(gameloop, 1000)
+            gameInterval = setInterval(gameloop, 200)
         })
         //gameloop
         const gameloop = () => {
-            adjustAngery(5)
+            adjustAngery(1)
             if (berserk) {
-                adjustBotherly(20)
+                adjustAnnoyance(5)
             } else {
-                adjustBotherly(5)
+                adjustAnnoyance(1)
             }
-            adjustChonky(-2.5)
+            adjustChonky(-.5)
             if (chonky >= 100) {
                 alert("The Kitty Is Too Full And Explodes! \nGame Over");
                 gameOver()
             }
-            if (botherly >= 100) {
+            if (annoyance >= 100) {
                 alert("You Were So Annoyed You Throw The Kitty Out The Window! \nGame Over");
                 gameOver()
             }
@@ -72,5 +87,5 @@ $(document).ready(
             score++;
             $("#score").text(score)
         }
-        let gameInterval = setInterval(gameloop, 1000)
+        let gameInterval = setInterval(gameloop, 200)
     })
