@@ -1,9 +1,10 @@
+//color constants
+const safe='#14A76C';
+const mid='#FFE400';
+const danger='#FF652F';
 $(document).ready(
     () => {
         //intialize variables
-        const safe='#14A76C';
-        const mid='#FFE400';
-        const danger='#FF652F';
         let angery = 0;
         let chonky = 0;
         let annoyance = 0;
@@ -12,6 +13,7 @@ $(document).ready(
         let score = 0;
         let bestScore = 0;
         let gameInterval;
+        let confuseInterval;
         //functions to modify variable and the appriopraite text
         const colorCorrector= (name,value) =>{
             if (value<30){
@@ -47,6 +49,7 @@ $(document).ready(
             berserk = false;
             $("#confused").hide()
             clearInterval(gameInterval)
+            clearTimeout(confuseInterval)
             bestScore= score > bestScore ? score : bestScore;
             $("#bestScore").text(bestScore)
             score = 0;
@@ -68,6 +71,9 @@ $(document).ready(
         })
         $('#sing').click(()=>{
             $("#confused").show()
+            confuseTimeout=setTimeout( ()=> {
+                $("#confused").hide()
+            },3000)
         })
         $("#reset").click(() => {
             gameOver()

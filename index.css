@@ -20,7 +20,9 @@ h1 {
 #beserk {
     color: red
 }
-
+#confusedHolder{
+    min-height: 1.1em
+}
 /* TODO 
 set the scores to the side
 bottom center the buttons
